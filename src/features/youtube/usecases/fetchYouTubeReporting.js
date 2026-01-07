@@ -16,7 +16,7 @@ exports.fetchYouTubeReporting = async () => {
         },
         thisMonth: {
             estimatedRevenue: (Math.round((data.currentMonthRevenue) * 100) / 100).toString() + ' €',
-        }
+        },
     };
 
     set(result, 'youtubeReporting.json', '../features/youtube/cache');

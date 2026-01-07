@@ -1,12 +1,14 @@
 const cron = require('node-cron');
+const { fetchYouTubeReporting } = require('../features/youtube/usecases/fetchYouTubeReporting');
+const { fetchDomadooAffiliation } = require('../features/domadoo/usecases/fetchDomadooAffiliation');
 
 const initCrons = () => {
-    // Exemple : S'exécute toutes les 5 minutes
-    cron.schedule('*/5 * * * *', () => {
-        console.log(`[CRON] Exécution automatique le : ${new Date().toLocaleTimeString()}`);
-        // Ajoute ta logique ici (ex: fetch une donnée, nettoyer un fichier...)
+    // Exemple : S'exécute toutes les heures
+    cron.schedule('0 * * * *', () => {
+        console.log("🔄 Exécution des tâches planifiées...");
+        fetchYouTubeReporting();
+        fetchDomadooAffiliation();
     });
-
     console.log("✅ Gestionnaire de tâches planifiées activé.");
 };
 

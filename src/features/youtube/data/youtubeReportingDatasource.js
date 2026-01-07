@@ -42,7 +42,7 @@ exports.getYouTubeReportingData = async () => {
     const result = {
       totalSubscribers: channel.data.items[0].statistics.subscriberCount,
       last30Days: report.data.rows[0],
-      currentMonthRevenue: currentMonthReport.data.rows?.[0]?.[0] 
+      currentMonthRevenue: currentMonthReport.data.rows?.[0]?.[0],
     };
 
     return result;
@@ -51,3 +51,4 @@ exports.getYouTubeReportingData = async () => {
     console.error("Erreur détaillée:", err.response?.data || err.message);
   }
 };
+
