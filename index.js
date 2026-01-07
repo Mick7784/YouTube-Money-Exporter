@@ -1,5 +1,6 @@
 const express = require('express');
 const initCrons = require('./src/crons/crons');
+const main = require('./src/features/mainController');
 const domadoo = require('./src/features/domadoo/domadooController');
 const youtube = require('./src/features/youtube/youtubeController');
 require('dotenv').config();
@@ -11,8 +12,10 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // --- ROUTES API ---
+app.use('/api/', main);
 app.use('/api/domadoo', domadoo);
 app.use('/api/youtube', youtube);
+
 
 // --- DÉMARRAGE ---
 app.listen(PORT, () => {

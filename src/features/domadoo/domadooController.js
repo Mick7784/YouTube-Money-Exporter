@@ -1,7 +1,6 @@
 const router = require('express').Router();
 
 const { get } = require('../../utils/cache');
-
 const { fetchDomadooAffiliation } = require('./usecases/fetchDomadooAffiliation');
 
 router.get('/', async (req, res) => {

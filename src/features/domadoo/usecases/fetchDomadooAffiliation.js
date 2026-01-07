@@ -1,6 +1,6 @@
 const cheerio = require('cheerio');
 const domadooDatasource = require('../data/domadooDatasource');
-const { cacheDomadooAffiliation } = require('./cacheDomadooAffiliation');
+const { set } = require('../../../utils/cache');
 
 exports.fetchDomadooAffiliation = async () => {
     const data = await domadooDatasource.fetchDomadooAffiliateData();
@@ -27,7 +27,7 @@ exports.fetchDomadooAffiliation = async () => {
         total
     };
 
-    cacheDomadooAffiliation(result);
+    set(result, 'domadooAffiliation.json', '../features/domadoo/cache');
 
     return result;
 };
