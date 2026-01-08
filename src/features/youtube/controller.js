@@ -1,8 +1,12 @@
+const cron = require('../../utils/cron');
 const router = require('express').Router();
-
 const cache = require('../../utils/cache');
 const service = require('./service');
 
+// Init scheduled task
+cron.eachDay(service.fetchYouTubeReporting, 'YouTube');
+
+// Routes
 router.get('/', async (req, res) => {
     try {
         const data = await service.fetchYouTubeReporting();

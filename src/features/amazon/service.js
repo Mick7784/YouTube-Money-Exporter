@@ -3,6 +3,8 @@ const datasource = require('./datasource');
 const cache = require('../../utils/cache');
 
 exports.fetchAmazonAffiliation = async () => {
+    console.log("🌐 Fetching Amazon data...");
+
     const reporting = await datasource.fetchAmazonReporting();
     const history = await datasource.fetchAmazonPaymentHistory();
 

@@ -2,6 +2,7 @@ const datasource = require('./datasource');
 const cache = require('../../utils/cache');
 
 exports.fetchYouTubeReporting = async () => {
+    console.log("🌐 Fetching YouTube data...");
     const data = await datasource.getYouTubeReportingData();
 
     const result = {

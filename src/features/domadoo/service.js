@@ -3,6 +3,8 @@ const datasource = require('./datasource');
 const cache = require('../../utils/cache');
 
 exports.fetchDomadooAffiliation = async () => {
+    console.log("🌐 Fetching Domadoo data...");
+
     const data = await datasource.fetchDomadooAffiliateData();
 
     const $ = cheerio.load(data);

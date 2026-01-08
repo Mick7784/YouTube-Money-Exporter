@@ -1,7 +1,12 @@
+const cron = require('../../utils/cron');
 const router = require('express').Router();
 const cache = require('../../utils/cache');
 const service = require('./service');
 
+// Init scheduled task
+cron.eachDay(service.fetchAmazonAffiliation, 'Amazon');
+
+// Routes
 router.get('/', async (req, res) => {
     try {
         const data = await service.fetchAmazonAffiliation();
