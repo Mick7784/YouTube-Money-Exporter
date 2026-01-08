@@ -1,16 +1,21 @@
-services: 
+version: '3.8' 
+
+services:
   app:
     build: .
+    container_name: youtube_money_exporter
     ports:
       - "3000:3000"
     volumes:
       - .:/app
+    working_dir: /app
     environment:
       - PORT=3000
-      - DOMADOO_COOKIE=your_domadoo_cookie_here
-      - GCP_CLIENT_ID=your_gcp_client_id_here
-      - GCP_CLIENT_SECRET=your_gcp_client_secret_here
-      - GCP_REFRESH_TOKEN=your_gcp_refresh_token_here
-      - AMAZON_REPORTING_URL=your_amazon_reporting_url_here
-      - AMAZON_COOKIE=your_amazon_cookie_here
+      - DOMADOO_COOKIE=${DOMADOO_COOKIE}
+      - GCP_CLIENT_ID=${GCP_CLIENT_ID}
+      - GCP_CLIENT_SECRET=${GCP_CLIENT_SECRET}
+      - GCP_REFRESH_TOKEN=${GCP_REFRESH_TOKEN}
+      - AMAZON_REPORTING_URL=${AMAZON_REPORTING_URL}
+      - AMAZON_COOKIE=${AMAZON_COOKIE}
+    restart: always
     command: npm run start
