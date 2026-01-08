@@ -4,7 +4,7 @@ exports.fetchDomadooAffiliateData = async () => {
     const url = "https://www.domadoo.fr/fr/affiliation"
     const cookie = process.env.DOMADOO_COOKIE;
 
-    console.log(cookie);
+    console.log("cookie is " + cookie);
 
     return await axios.get(url, {
         headers: {
