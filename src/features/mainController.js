@@ -1,13 +1,15 @@
 const router = require('express').Router();
 const { get } = require('../utils/cache');
 const { fetchYouTubeReporting } = require('./youtube/usecases/fetchYouTubeReporting');
+const { fetchAmazonAffiliation } = require('./amazon/usecases/fetchAmazonAffiliation');
 const { fetchDomadooAffiliation } = require('./domadoo/usecases/fetchDomadooAffiliation');
 
 router.get('/', async (req, res) => {
     try {
         const youtube = await get('youtubeReporting.json', '../features/youtube/cache');
         const domadoo = await get('domadooAffiliation.json', '../features/domadoo/cache');
-        res.json({ youtube, domadoo });
+        const amazon = await get('amazonAffiliation.json', '../features/amazon/cache');
+        res.json({ youtube, domadoo, amazon });
     } catch (error) {
         console.error(error);
         res.status(500).json({ 
@@ -20,6 +22,7 @@ router.patch('/refresh', async (req, res) => {
     try {
         fetchYouTubeReporting();
         fetchDomadooAffiliation();
+        fetchAmazonAffiliation()
         
         res.json("Mise à jour des données globales lancée.");
     } catch (error) {

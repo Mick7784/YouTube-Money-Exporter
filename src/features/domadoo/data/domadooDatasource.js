@@ -13,7 +13,6 @@ exports.fetchDomadooAffiliateData = async () => {
         responseType: 'text'
     })
     .then(response => {
-        console.log("On va répondre")
         return response.data;
     })
     .catch(error => {

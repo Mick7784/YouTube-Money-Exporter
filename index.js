@@ -1,9 +1,7 @@
+require('dotenv').config();
+
 const express = require('express');
 const initCrons = require('./src/crons/crons');
-const main = require('./src/features/mainController');
-const domadoo = require('./src/features/domadoo/domadooController');
-const youtube = require('./src/features/youtube/youtubeController');
-require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,9 +10,10 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // --- ROUTES API ---
-app.use('/api/', main);
-app.use('/api/domadoo', domadoo);
-app.use('/api/youtube', youtube);
+app.use('/api/', require('./src/features/mainController'));
+app.use('/api/amazon', require('./src/features/amazon/amazonController'));
+app.use('/api/domadoo', require('./src/features/domadoo/domadooController'));
+app.use('/api/youtube', require('./src/features/youtube/youtubeController'));
 
 
 // --- DÉMARRAGE ---
