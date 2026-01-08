@@ -5,12 +5,12 @@ services:
     build: .
     container_name: youtube_money_exporter
     ports:
-      - "3000:3000"
+      - "3333:3333"
     volumes:
       - .:/app
     working_dir: /app
     environment:
-      - PORT=3000
+      - PORT=3333
       - DOMADOO_COOKIE=${DOMADOO_COOKIE}
       - GCP_CLIENT_ID=${GCP_CLIENT_ID}
       - GCP_CLIENT_SECRET=${GCP_CLIENT_SECRET}
