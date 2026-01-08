@@ -6,7 +6,7 @@ exports.fetchDomadooAffiliateData = async () => {
 
     return await axios.get(url, {
         headers: {
-            'Cookie': cookie,
+            'Cookie': cookie.replace(/\$\$/g, '$'),
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/',
             'Accept': 'text/html',
         },
