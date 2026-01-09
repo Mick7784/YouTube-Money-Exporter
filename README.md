@@ -53,9 +53,11 @@ GCP_REFRESH_TOKEN
 ```
 AMAZON_LOGIN
 AMAZON_PASSWORD
+AMAZON_SECRET_KEY
 ```
 1. You just need to set your credentials in the `.env` file. Don't commit it !!  
-
+2. If you configured OTP security, you should put the key in the `AMAZON_SECRET_KEY` variable
+   1. Be sure the default method is OTP, and not SMS
 
 
 ### Domadoo
