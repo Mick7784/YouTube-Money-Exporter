@@ -23,6 +23,10 @@ exports.openAmazonReportingPageAndFindData = async () => {
         const thisMonth = {
             clicks: await page.textContent("#ac-report-commission-commision-clicks"),
             itemsOrdered: await page.textContent("#ac-report-commission-commision-ordered"),
+            itemsShipped: await page.textContent("#ac-report-commission-commision-shipped"),
+            itemsReturned: await page.textContent("#ac-report-commission-commision-returned"),
+            conversionRate: await page.textContent("#ac-report-commission-commision-conversion"),
+            sumItemsShipped: (await page.textContent("#ac-report-commission-commision-shipped-revenue")).replace('€', '').trim() + ' €',
             earnings: (await page.textContent("#ac-report-commission-commision-total")).replace('€', '').trim() + ' €',
         }
 
