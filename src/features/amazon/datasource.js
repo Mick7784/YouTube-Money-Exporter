@@ -7,6 +7,8 @@ exports.openAmazonReportingPageAndFindData = async () => {
     const context = await browser.newContext();
     const page = await context.newPage();
 
+    console.log(process.env.AMAZON_SECRET_KEY)
+
     try {
         // open url
         await page.goto("https://partenaires.amazon.fr/p/reporting/earnings");
