@@ -9,11 +9,12 @@ services:
     working_dir: /app
     environment:
       - PORT=3333
-      - DOMADOO_COOKIE=${DOMADOO_COOKIE}
       - GCP_CLIENT_ID=${GCP_CLIENT_ID}
       - GCP_CLIENT_SECRET=${GCP_CLIENT_SECRET}
       - GCP_REFRESH_TOKEN=${GCP_REFRESH_TOKEN}
       - AMAZON_LOGIN=${AMAZON_LOGIN}
       - AMAZON_PASSWORD=${AMAZON_PASSWORD}
+      - DOMADOO_LOGIN=${DOMADOO_LOGIN}
+      - DOMADOO_PASSWORD=${DOMADOO_PASSWORD}
     restart: always
     command: npm run start

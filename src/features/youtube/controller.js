@@ -10,7 +10,7 @@ cron.eachDay(service.fetchYouTubeReporting, 'YouTube');
 router.get('/', async (req, res) => {
     try {
         const data = await service.fetchYouTubeReporting();
-        res.json({ data });
+        res.json(data);
     } catch (error) {
         console.error(error);
         res.status(500).json({ 

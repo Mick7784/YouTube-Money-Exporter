@@ -1,11 +1,10 @@
-const cheerio = require('cheerio');
 const datasource = require('./datasource');
 const cache = require('../../utils/cache');
 
 exports.fetchAmazonAffiliation = async () => {
     console.log("🌐 Fetching Amazon data...");
 
-    const reporting = await datasource.fetchAmazonReporting();
+    const reporting = await datasource.openAmazonReportingPageAndFindData();
 
     const result = {
         ...reporting,

@@ -1,18 +1,12 @@
-const { chromium } = require('playwright');
+const { firefox } = require('playwright-extra');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+const stealth = StealthPlugin();
+stealth.enabledEvasions.delete('user-agent-override');
 
-exports.fetchAmazonReporting = async () => {
-    const browser = await chromium.launch({ 
-        headless: true, // FORCE le mode headless pour le test
-        args: [
-            '--use-fake-device-for-media-stream',
-            '--use-fake-ui-for-media-stream',
-            '--disable-bluetooth',
-            '--mute-audio',
-            '--no-sandbox', // Souvent nécessaire dans Docker
-            '--disable-setuid-sandbox',
-            '--disable-extensions',
-        ]
-     });
+firefox.use(stealth);
+
+exports.openAmazonReportingPageAndFindData = async () => {
+    const browser = await firefox.launch({headless: true});
     const context = await browser.newContext();
     const page = await context.newPage();
 
@@ -23,9 +17,7 @@ exports.fetchAmazonReporting = async () => {
         await page.click('#continue');
         await page.fill('#ap_password', process.env.AMAZON_PASSWORD);
         await page.click('#signInSubmit');
-
-        // Wait 3s
-        await page.waitForTimeout(3000);
+        await page.waitForSelector('#ac-report-commission-commision-clicks', { timeout: 10000 });
 
         // Get the data
         const thisMonth = {
@@ -47,6 +39,6 @@ exports.fetchAmazonReporting = async () => {
 
     } catch (error) {
         console.error("❌ Erreur lors de la navigation vers la page Amazon Reporting :", error.message);
+        browser.close();
     }
-    return ""
 };
