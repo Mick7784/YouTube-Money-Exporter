@@ -29,20 +29,20 @@ exports.getYouTubeReportingData = async () => {
       ids: 'channel==MINE',
       startDate: startDate,
       endDate: today,
-      metrics: 'views,estimatedMinutesWatched,subscribersGained,estimatedRevenue'
+      metrics: 'views,estimatedMinutesWatched,averageViewDuration,subscribersGained,subscribersLost,likes,comments,shares,estimatedRevenue'
     });
 
     const currentMonthReport = await analytics.reports.query({
       ids: 'channel==MINE',
       startDate: firstDayOfMonth,
       endDate: today,
-      metrics: 'estimatedRevenue'
+      metrics: 'views,estimatedMinutesWatched,averageViewDuration,subscribersGained,subscribersLost,likes,comments,shares,estimatedRevenue'
     });
 
     const result = {
       totalSubscribers: channel.data.items[0].statistics.subscriberCount,
       last30Days: report.data.rows[0],
-      currentMonthRevenue: currentMonthReport.data.rows?.[0]?.[0],
+      currentMonth: currentMonthReport.data.rows[0],
     };
 
     return result;
