@@ -1,7 +1,7 @@
 const { default: axios } = require("axios");
 
 exports.fetchDomadooAffiliateData = async () => {
-    const url = "https://httpbin.org/headers"
+    const url = "https://www.domadoo.fr/fr/affiliation"
     const cookie = process.env.DOMADOO_COOKIE;
 
     return await axios.get(url, {
