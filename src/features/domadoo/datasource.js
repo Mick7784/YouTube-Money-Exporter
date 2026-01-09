@@ -24,6 +24,7 @@ exports.openDomadooAffiliationPageAndFindData = async () => {
 
         const last30days = {
             clicks: await rows.locator("div:nth-child(1) span.pull-xs-right").first().innerText(),
+            uniquesClicks: await rows.locator("div:nth-child(2) span.pull-xs-right").first().innerText(),
             waitingSales: await rows.locator("div:nth-child(3) span.pull-xs-right").first().innerText(),
             approvedSales: await rows.locator("div:nth-child(4) span.pull-xs-right").first().innerText(),
             earnings: await rows.locator("div:nth-child(5) span.pull-xs-right").first().innerText(),
@@ -31,17 +32,35 @@ exports.openDomadooAffiliationPageAndFindData = async () => {
 
         const total = {
             clicks: await rows.locator("div:nth-child(1) span.pull-xs-right").nth(1).innerText(),
+            uniquesClicks: await rows.locator("div:nth-child(2) span.pull-xs-right").nth(1).innerText(),
             approvedSales: await rows.locator("div:nth-child(3) span.pull-xs-right").nth(1).innerText(),
             earnings: await rows.locator("div:nth-child(4) span.pull-xs-right").nth(1).innerText(),
+            payments: await rows.locator("div:nth-child(5) span.pull-xs-right").nth(1).innerText(),
             waitingPayments: await rows.locator("div:nth-child(6) span.pull-xs-right").first().innerText(),
             balance: await rows.locator("div:nth-child(7) span.pull-xs-right").first().innerText(),
         };
+
+        const table = page.locator("#myaffiliateaccount-sales-commissions table tbody");
+        const lastSales = [];
+        const rowCount = await table.locator("tr").count();
+        for (let i = 0; i < rowCount; i++) {
+            const row = table.locator("tr").nth(i);
+            const id = await row.locator("td").nth(0).innerText();
+            const date = await row.locator("td").nth(1).innerText();
+            const order = await row.locator("td").nth(2).innerText();
+            const commission = await row.locator("td").nth(3).innerText();
+            const status = (await row.locator("td").nth(4).innerText()).replaceAll('\n', ' ').trim();
+            const approved = status.toLowerCase().includes('check')
+
+            lastSales.push({ id, date, order, commission, approved });
+        }
 
         await browser.close();
 
         return {
             last30days,
             total,
+            lastSales,
         };
 
     } catch (error) {
