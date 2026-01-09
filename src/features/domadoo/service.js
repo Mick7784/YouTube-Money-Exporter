@@ -6,6 +6,7 @@ exports.fetchDomadooAffiliation = async () => {
     console.log("🌐 Fetching Domadoo data...");
 
     const data = await datasource.fetchDomadooAffiliateData();
+    return data
 
     const $ = cheerio.load(data);
     
