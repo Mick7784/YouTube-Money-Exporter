@@ -16,6 +16,7 @@ exports.openAmazonReportingPageAndFindData = async () => {
         await page.click('#signInSubmit');
         if (process.env.AMAZON_SECRET_KEY) {
             const token = authenticator.generate(process.env.AMAZON_SECRET_KEY.replaceAll(/\s+/g, ''));
+            console.log("Using MFA token:", token);
             await page.fill('#auth-mfa-otpcode', token);
             await page.click('#auth-signin-button');
         }
