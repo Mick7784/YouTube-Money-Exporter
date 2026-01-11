@@ -31,6 +31,7 @@ exports.fetchYouTubeReporting = async () => {
             shares: String(data.currentMonth[7]),
             estimatedRevenue: (Math.round((data.currentMonth[8]) * 100) / 100).toString() + ' €',
         },
+        lastVideo: data.lastVideo,
         lastUpdate: new Date().toISOString(),
     };
 

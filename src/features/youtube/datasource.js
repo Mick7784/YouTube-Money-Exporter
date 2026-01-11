@@ -39,10 +39,35 @@ exports.getYouTubeReportingData = async () => {
       metrics: 'views,estimatedMinutesWatched,averageViewDuration,subscribersGained,subscribersLost,likes,comments,shares,estimatedRevenue'
     });
 
+    // Last video stats
+    const channelData = channel.data.items[0];
+    const uploadsPlaylistId = channel.contentDetails?.relatedPlaylists?.uploads 
+                             || channelData.id.replace(/^UC/, 'UU');
+    const playlistItems = await youtube.playlistItems.list({
+      part: 'snippet',
+      playlistId: uploadsPlaylistId,
+      maxResults: 1,
+    });
+    const lastVideoId = playlistItems.data.items[0].snippet.resourceId.videoId;
+
+    const lastVideoStatsResponse = await youtube.videos.list({
+      part: 'statistics',
+      id: lastVideoId,
+    });
+    const lastVideoStats = lastVideoStatsResponse.data.items[0].statistics;
+
+    const lastVideo = {
+      title : playlistItems.data.items[0].snippet.title,
+      thumbnail : playlistItems.data.items[0].snippet.thumbnails?.high?.url || '',
+      stats : lastVideoStats,
+    }
+    
+
     const result = {
       totalSubscribers: channel.data.items[0].statistics.subscriberCount,
       last30Days: report.data.rows[0],
       currentMonth: currentMonthReport.data.rows[0],
+      lastVideo: lastVideo,
     };
 
     return result;
