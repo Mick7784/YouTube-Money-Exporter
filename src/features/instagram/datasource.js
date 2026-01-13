@@ -9,6 +9,7 @@ exports.fetchInstagramProfile = async () => {
         "User-Agent":
           "Instagram 76.0.0.15.395 Android (24/7.0; 640dpi; 1440x2560; samsung; SM-G930F; herolte; samsungexynos8890; en_US; 138226743)",
         Accept: "application/json",
+        "x-ig-app-id": 936619743392459
       },
     });
 
