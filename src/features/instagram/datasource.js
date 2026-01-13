@@ -1,5 +1,6 @@
 const axios = require("axios");
 
+
 exports.fetchInstagramProfile = async () => {
   try {
     const username = process.env.INSTAGRAM_USERNAME;
@@ -10,6 +11,23 @@ exports.fetchInstagramProfile = async () => {
           "Instagram 76.0.0.15.395 Android (24/7.0; 640dpi; 1440x2560; samsung; SM-G930F; herolte; samsungexynos8890; en_US; 138226743)",
         Accept: "application/json",
         "x-ig-app-id": 936619743392459
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching Instagram profile:", error);
+  }
+};
+
+exports.fetchInstagramProfileWithSearchApi = async () => {
+  try {
+    const username = process.env.INSTAGRAM_USERNAME;
+    const searchApiKey = process.env.SEARCH_API_APIKEY;
+    const url = `https://www.searchapi.io/api/v1/search?engine=instagram_profile&username=${username}&api_key=${searchApiKey}`;
+    const response = await axios.get(url, {
+      headers: {
+        Accept: "application/json"
       },
     });
 
