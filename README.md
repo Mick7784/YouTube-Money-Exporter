@@ -114,8 +114,8 @@ rest:
 
     # Capteur RAW (sert de base, + attributs)
     sensor:
-      - name: domotik_stats_raw
-        unique_id: domotik_stats_raw
+      - name: youtube_money_exporter_stats_raw
+        unique_id: youtube_money_exporter_stats_raw
         value_template: "{{ now().isoformat() }}"
         json_attributes:
           - youtube
